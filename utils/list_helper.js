@@ -12,6 +12,22 @@ const listWithOneBlog = [
     __v: 0
   }
 ];
+
+const listNoLikes = [
+  {
+    title: 'No Likes',
+    author: 'Like Likes',
+  }
+];
+
+const listLikesISNULL = [
+  {
+    title: 'No Likes',
+    author: 'Like Likes',
+    likes: null
+  }
+];
+
 const initialBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -258,13 +274,13 @@ const mostBlogs = (blogs) => {
 */
 
 module.exports = {
-  initialBlogs, format, nonExistingId, blogsInDb,
+  initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes
   dummy,
   listWithOneBlog,
   totalLikes,
   findWinner,
   mostBlogs,
-  mostLikes
+  mostLikes,
 };
 /**
 console.log(dummy());

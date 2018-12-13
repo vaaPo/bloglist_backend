@@ -83,6 +83,18 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
       return response.status(400).json({ error: 'title missing' });
     }
 
+    if (body.title === null) {
+      return response.status(400).json({ error: 'title is null' });
+    }
+
+    if (body.url === undefined) {
+      return response.status(400).json({ error: 'url missing' });
+    }
+
+    if (body.url === null) {
+      return response.status(400).json({ error: 'url is null' });
+    }
+  
     if (body.likes === undefined) {
         body.likes = 0;
     }
