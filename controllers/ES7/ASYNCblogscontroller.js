@@ -79,13 +79,13 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
       return response.status(401).json({ error: 'token missing or invalid' })
     };
 */
-    if (body.content === undefined) {
-      return response.status(400).json({ error: 'content missing' });
+    if (body.title === undefined) {
+      return response.status(400).json({ error: 'title missing' });
     }
 
     //    const user = await User.findById(body.userId);
 
-    const Blog = new Blog({
+    const postBlog = new Blog({
       title: body.title,
       author: body.author,
       url: body.url,
@@ -98,10 +98,10 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
     });
 
     //console.log('blogsRouter.post user._id',Blog.user);
-    const savedBlog = await Blog.save();
+    const savedBlog = await postBlog.save();
     //    user.Blogs = user.Blogs.concat(savedBlog._id);
     //    await user.save();                                      // stores to users collection the new Blog id for the user, so user can have several Blogs
-    response.json(Blog.format(Blog));
+    response.json(Blog.format(postBlog));
   }  catch(exception) {
     if (exception.name === 'JsonWebTokenError' ) {
       response.status(401).json({ error: exception.message });
