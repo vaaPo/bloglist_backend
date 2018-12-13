@@ -19,9 +19,12 @@ requests
 │   └── put_api_blogs.rest
 └── login.rest
 tests
+├── average.test.js
+└── list.test.js
 utils
 ├── config.js
 ├── for_testing.js
+├── list_helper.js
 └── middleware.js
 
 ```
