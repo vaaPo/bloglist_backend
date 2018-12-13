@@ -27,3 +27,21 @@
 - [] 4.21* blogilistan laajennus, osa 10
 
 ### npm installs
+### directories + .env login.js / login.rest
+```
+$ cp ../fullstack_part3_backend/package.json .
+$ cp ../fullstack_part3_backend/.env .
+$ mkdir build
+$ cd build
+/build$ mkdir static
+/build$ cd ..
+$ mkdir controllers
+$ mkdir controllers/ES7
+$ cp ../fullstack_part3_backend/controllers/login.js controllers/
+$ mkdir models
+$ mkdir requests
+$ mkdir requests/api_blogs
+$ cp ../fullstack_part3_backend/requests/login.rest ./requests/
+$ mkdir tests
+$ mkdir utils
+```
