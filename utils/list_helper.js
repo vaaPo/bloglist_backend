@@ -92,7 +92,7 @@ const totalLikes = (blogs) => {
 
 const findWinner = (blogs) => {
   var len=blogs.length;
-  console.log('len is', len);
+//  console.log('len is', len);
   var max = -Infinity;
   var maxpos = len;
   while (len--) {
@@ -169,11 +169,55 @@ const mostBlogs = (blogs) => {
   return mostBlogsArr; 
 };
 
+const mostLikes = (blogs) => {
+  //https://stackoverflow.com/questions/51971373/group-by-count-distinct-sum-totals-from-objects-in-javascript-array
+  const byAuthor = groupBy(blogs.filter(it => it._id), it => it['author']);
+  const groupedbyAuthor = Object.keys(byAuthor).map(name => {
+    const bytitle = groupBy(byAuthor[name], it => it.title)
+    const sum = byAuthor[name].reduce((acc, it) => acc+it.likes, 0)
+    return {
+      'author': name,
+      titles: Object.keys(bytitle).length,
+      likes: sum
+    };
+  });
+//  console.log(groupedbyAuthor);
+  var len=groupedbyAuthor.length;
+//  console.log('len is', len);
+  var max = -Infinity;
+  var maxpos = len;
+  while (len--) {
+    if (groupedbyAuthor[len].likes > max) {
+      max = groupedbyAuthor[len].likes;
+      maxpos=len;
+      //console.log('maxpos is now',len,' with max',max);
+    };
+  };
+
+/**
+ *console.log('findWinner found maxpos', maxpos);
+  console.log(groupedbyAuthor[maxpos].title)s;
+  console.log(groupedbyAuthor[maxpos].author);
+  console.log(groupedbyAuthor[maxpos].likes);
+  */
+ /**{
+  author: "Edsger W. Dijkstra",
+  likes: 17
+}
+
+ */
+//  const mostBlogsArr = { "author": groupedbyAuthor[maxpos].author, "titles": groupedbyAuthor[maxpos].titles, "likes": groupedbyAuthor[maxpos].likes};
+  const mostLikesArr = { "author": groupedbyAuthor[maxpos].author, "likes": groupedbyAuthor[maxpos].likes };
+  
+ // console.log(mostBlogsArr);
+  return mostLikesArr; 
+};
 
 //console.log(mostBlogs(tblogs));
 
-//{ author: 'Robert C. Martin', titles: 3, likes: 12}
-
+//{ author: 'Robert C. Martin', blogs: 3 }
+//console.log(mostLikes(tblogs));
+//{ author: 'Edsger W. Dijkstra', likes: 17 }
 
 /**
 const mostBlogs = (blogs) => {
@@ -194,7 +238,8 @@ module.exports = {
   listWithOneBlog,
   totalLikes,
   findWinner,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 };
 /**
 console.log(dummy());

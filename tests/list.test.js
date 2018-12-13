@@ -37,4 +37,8 @@ describe('favorite blogs and most blogging authors', () => {
     const result = listHelper.mostBlogs(listHelper.tblogs);
     expect(result).toEqual({ author: 'Robert C. Martin', blogs: 3}); //, likes: 12});
   });
+  test('hw4.7* find most likes author from teachers blogs', () => {
+    const result = listHelper.mostLikes(listHelper.tblogs);
+    expect(result).toEqual({ author: 'Edsger W. Dijkstra', likes: 17 });
+  });
 });
