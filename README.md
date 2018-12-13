@@ -1,4 +1,30 @@
 # bloglist_backend
+Simple bloglist backend API /api/blogs
+## directory
+```
+controllers
+├── ES7
+│   └── ASYNCblogscontroller.js
+└── login.js
+models
+├── blog.js
+└── user.js
+requests
+├── api_blogs
+│   ├── delete_api_blogs_id.rest
+│   ├── get_api_blogs_id.rest
+│   ├── get_api_blogs.rest
+│   ├── post_api_blogs_bearer_auth.rest
+│   ├── post_api_blogs.rest
+│   └── put_api_blogs.rest
+└── login.rest
+tests
+utils
+├── config.js
+├── for_testing.js
+└── middleware.js
+
+```
 
 ## github
 <https://github.com/vaaPo/bloglist_backend>
