@@ -58,3 +58,10 @@ $ touch ./controllers/ES7/ASYNCblogscontroller.js
 $ touch ./models/blog.js
 $ cp ../fullstack_part3_backend/models/user.js models/
 ```
+
+### git log and try test environment
+```
+git log --oneline --decorate --color
+npm rum watchtest
+```
+

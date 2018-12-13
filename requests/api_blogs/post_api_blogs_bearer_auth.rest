@@ -1,0 +1,9 @@
+POST http://localhost:3002/api/notes
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InpvcnJvIiwiaWQiOiI1YzExNTA4N2M5NDJhZTcxZmIzMDQ3N2MiLCJpYXQiOjE1NDQ2OTc2MDh9.AESduvNAUnEL0ZVlFN_65DAMHSFzs-oqRw0K_FaBIK4
+
+{
+   "content": "test bearer auth",
+   "important": true,
+   "userId": "5c115087c942ae71fb30477c"
+}
