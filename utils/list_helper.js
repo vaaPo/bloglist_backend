@@ -90,11 +90,36 @@ const totalLikes = (blogs) => {
 
 };
 
+const findWinner = (blogs) => {
+  var len=blogs.length;
+  console.log('len is', len);
+  var max = -Infinity;
+  var maxpos = len;
+  while (len--) {
+    if (blogs[len].likes > max) {
+      max = blogs[len].likes;
+      maxpos=len;
+      //console.log('maxpos is now',len,' with max',max);
+    };
+  };
+/**
+ *console.log('findWinner found maxpos', maxpos);
+  console.log(blogs[maxpos].title);
+  console.log(blogs[maxpos].author);
+  console.log(blogs[maxpos].likes);
+  */
+  const winnerarr = { "title": blogs[maxpos].title, "author": blogs[maxpos].author, "likes": blogs[maxpos].likes};
+
+  //return JSON.stringify(winnerarr); 
+  return winnerarr; 
+};
+
 module.exports = {
   dummy,
   tblogs,
   listWithOneBlog,
-  totalLikes
+  totalLikes,
+  findWinner
 };
 /**
 console.log(dummy());
@@ -109,3 +134,6 @@ console.log(kala);
 console.log(totalLikes([]));
 console.log(totalLikes());
  */
+//console.log(findWinner(tblogs));
+//kala = findWinner(tblogs);
+//console.log(kala);

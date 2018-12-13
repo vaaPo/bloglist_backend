@@ -27,5 +27,15 @@ describe('total likes', () => {
     const result = listHelper.totalLikes(listHelper.tblogs);
     expect(result).toBe(36);
   });
-
+});
+describe('favorite blogs and most blogging authors', () => {
+  test('hw4.5* find favorite blog from teachers blogs', () => {
+    const result = listHelper.findWinner(listHelper.tblogs);
+    expect(result).toEqual({title: "Canonical string reduction",author: "Edsger W. Dijkstra",likes: 12});
+  });
+  test('hw4.6* find most blogging author from teachers blogs', () => {
+    const blogs=[];
+    const result = listHelper.dummy(blogs);
+    expect(result).toBe(1);
+  });
 });
