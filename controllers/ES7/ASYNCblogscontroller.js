@@ -48,14 +48,14 @@ blogsRouter.get('/', async (request, response) => {//blogsRouter.get('/'
 
 blogsRouter.get('/:id', async (request, response) => {//blogsRouter.get('/:id'
   try {
-    const Blog = await Blog.findById(request.params.id);
+    const getBlog = await Blog.findById(request.params.id);
     //      .populate('user', {
     //        username: 1,
     //        name: 1
     //      });
 
-    if (Blog) {
-      response.json(Blog.format(Blog));
+    if (getBlog) {
+      response.json(Blog.format(getBlog));
     } else {
       response.status(404).end(); // request ok format, but id not found = 404 !!!
     }
