@@ -10,7 +10,7 @@ var morgan = require('morgan');
 const blogsRouter = require('./controllers/ES7/ASYNCblogscontroller');
 //const usersRouter = require('./controllers/ES7/ASYNCuserscontroller');
 const config = require('./utils/config');
-const loginRouter = require('./controllers/login');
+//const loginRouter = require('./controllers/login');
 
 //https://stackoverflow.com/questions/50448272/avoid-current-url-string-parser-is-deprecated-warning-by-setting-usenewurlpars
 //DeprecationWarning: current URL string parser is deprecated,
@@ -54,17 +54,6 @@ app.use(morgan(function (tokens, req, res) { //app.use(morgan('tiny'));      //F
 
 app.use(express.static('build'));
 app.use(middleware.logger);
-
-const Blog = mongoose.model('Blog', {
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-});
-
-module.exports = Blog;
-
-
 /**
 app.use('/api/notes', notesRouter);   // notecontroller has nomore /api/notes path prefixed
 app.use('/api/persons', personsRouter);   // personsontroller has nomore /api/persons path prefixed
