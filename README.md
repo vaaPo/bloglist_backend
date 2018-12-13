@@ -44,5 +44,13 @@ $ mkdir requests/api_blogs
 $ cp ../fullstack_part3_backend/requests/login.rest ./requests/
 $ mkdir tests
 $ mkdir utils
+```
+### npm installs
+```
 $ npm install
+```
+
+### some files
+```
+$ touch index.js
 ```
