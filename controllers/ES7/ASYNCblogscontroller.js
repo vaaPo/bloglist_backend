@@ -83,6 +83,15 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
       return response.status(400).json({ error: 'title missing' });
     }
 
+    if (body.likes === undefined) {
+        body.likes = 0;
+    }
+
+    if (body.likes === null) {
+        body.likes = 0;
+    }
+
+
     //    const user = await User.findById(body.userId);
 
     const postBlog = new Blog({

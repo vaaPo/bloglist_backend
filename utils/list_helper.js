@@ -1,5 +1,7 @@
 //import blogs from '../datafiles/blogs_for_testing';
 //const blogsfortesting = blogs;
+const Blog = require('../models/blog');
+
 const listWithOneBlog = [
   {
     _id: '5a422aa71b54a676234d17f8',
@@ -10,7 +12,7 @@ const listWithOneBlog = [
     __v: 0
   }
 ];
-const tblogs = [
+const initialBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
     title: 'React patterns',
@@ -60,6 +62,29 @@ const tblogs = [
     __v: 0
   }
 ];
+
+const format = (blog) => {
+  return {
+    id: blog._id,
+    title: blog.title,
+    author: blog.author,
+    url: blog.url,
+    likes: blog.likes
+  };
+};
+
+const nonExistingId = async () => {
+  const note = new Blog();
+  await note.save();
+  await note.remove();
+
+  return note._id.toString();
+};
+
+const blogsInDb = async () => {
+  const blogs = await Blog.find({});
+  return blogs.map(format);
+};
 
 
 //letter from teacher
@@ -213,10 +238,10 @@ const mostLikes = (blogs) => {
   return mostLikesArr; 
 };
 
-//console.log(mostBlogs(tblogs));
+//console.log(mostBlogs(initialBlogs));
 
 //{ author: 'Robert C. Martin', blogs: 3 }
-//console.log(mostLikes(tblogs));
+//console.log(mostLikes(initialBlogs));
 //{ author: 'Edsger W. Dijkstra', likes: 17 }
 
 /**
@@ -233,8 +258,8 @@ const mostBlogs = (blogs) => {
 */
 
 module.exports = {
+  initialBlogs, format, nonExistingId, blogsInDb,
   dummy,
-  tblogs,
   listWithOneBlog,
   totalLikes,
   findWinner,
@@ -247,15 +272,15 @@ console.log(listWithOneBlog);
 
 console.log(totalLikes(listWithOneBlog));
 
-const kala=totalLikes(tblogs);
+const kala=totalLikes(initialBlogs);
 
 console.log(kala);
 
 console.log(totalLikes([]));
 console.log(totalLikes());
  */
-//console.log(findWinner(tblogs));
-//kala = findWinner(tblogs);
+//console.log(findWinner(initialBlogs));
+//kala = findWinner(initialBlogs);
 //console.log(kala);
 
 
