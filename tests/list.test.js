@@ -9,3 +9,23 @@ describe('bloglist tests', () => {
     expect(result).toBe(1);
   });
 });
+
+describe('total likes', () => {
+  test('when bloglist is undefined', () => {
+    const result = listHelper.totalLikes();
+    expect(result).toBe(0);
+  });
+  test('when list is empty array', () => {
+    const result = listHelper.totalLikes([]);
+    expect(result).toBe(0);
+  });
+  test('when list has only one blog equals the likes of that', () => {
+    const result = listHelper.totalLikes(listHelper.listWithOneBlog);
+    expect(result).toBe(5);
+  });
+  test('when list has teachers example tblogs', () => {
+    const result = listHelper.totalLikes(listHelper.tblogs);
+    expect(result).toBe(36);
+  });
+
+});

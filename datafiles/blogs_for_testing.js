@@ -48,3 +48,4 @@ const blogs = [
     __v: 0
   }
 ];
+export default blogs;
