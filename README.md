@@ -50,7 +50,10 @@ $ mkdir utils
 $ npm install
 ```
 
-### some files
+### some files + letter from hw4.1 to index.js for refactoring
 ```
 $ touch index.js
+$ cp ../fullstack_part3_backend/utils/* utils/
+$ touch ./controllers/ES7/ASYNCblogscontroller.js
+$ touch ./models/blog.js
 ```
