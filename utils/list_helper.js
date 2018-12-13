@@ -114,12 +114,87 @@ const findWinner = (blogs) => {
   return winnerarr; 
 };
 
+function groupBy(a, keyFunction) {
+  const groups = {};
+  a.forEach(function(el) {
+    const key = keyFunction(el);
+    if (key in groups === false) {
+      groups[key] = [];
+    }
+    groups[key].push(el);
+  });
+  return groups;
+};
+
+const mostBlogs = (blogs) => {
+  //https://stackoverflow.com/questions/51971373/group-by-count-distinct-sum-totals-from-objects-in-javascript-array
+  const byAuthor = groupBy(blogs.filter(it => it._id), it => it['author']);
+  const groupedbyAuthor = Object.keys(byAuthor).map(name => {
+    const bytitle = groupBy(byAuthor[name], it => it.title)
+    const sum = byAuthor[name].reduce((acc, it) => acc+it.likes, 0)
+    return {
+      'author': name,
+      titles: Object.keys(bytitle).length,
+      likes: sum
+    };
+  });
+//  console.log(groupedbyAuthor);
+  var len=groupedbyAuthor.length;
+//  console.log('len is', len);
+  var max = -Infinity;
+  var maxpos = len;
+  while (len--) {
+    if (groupedbyAuthor[len].titles > max) {
+      max = groupedbyAuthor[len].titles;
+      maxpos=len;
+      //console.log('maxpos is now',len,' with max',max);
+    };
+  };
+
+/**
+ *console.log('findWinner found maxpos', maxpos);
+  console.log(groupedbyAuthor[maxpos].title)s;
+  console.log(groupedbyAuthor[maxpos].author);
+  console.log(groupedbyAuthor[maxpos].likes);
+  */
+ /**{
+  author: "Robert C. Martin",
+  blogs: 3
+}
+ */
+//  const mostBlogsArr = { "author": groupedbyAuthor[maxpos].author, "titles": groupedbyAuthor[maxpos].titles, "likes": groupedbyAuthor[maxpos].likes};
+  const mostBlogsArr = { "author": groupedbyAuthor[maxpos].author, "blogs": groupedbyAuthor[maxpos].titles };
+  
+ // console.log(mostBlogsArr);
+  return mostBlogsArr; 
+};
+
+
+//console.log(mostBlogs(tblogs));
+
+//{ author: 'Robert C. Martin', titles: 3, likes: 12}
+
+
+/**
+const mostBlogs = (blogs) => {
+  var groupBy = function(xs, key) {
+    return xs.reduce(function(rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  };
+  const groupedArr = groupBy(blogs, "author");
+  return groupedArr;
+};
+*/
+
 module.exports = {
   dummy,
   tblogs,
   listWithOneBlog,
   totalLikes,
-  findWinner
+  findWinner,
+  mostBlogs
 };
 /**
 console.log(dummy());
@@ -137,3 +212,33 @@ console.log(totalLikes());
 //console.log(findWinner(tblogs));
 //kala = findWinner(tblogs);
 //console.log(kala);
+
+
+/**
+var groupBy = function(xs, key) {
+  return xs.reduce(function(rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
+
+console.log(groupBy(['one', 'two', 'three'], 'length'));
+console.log(groupBy([{author:"a",likes:1}
+                    ,{author:"a",likes:12}
+                    ,{author:"b",likes:3}
+                    ,{author:"b",likes:999}]
+                    , 'author'));
+
+juppiarr=[{author:"a",likes:1}
+,{author:"a",likes:12}
+,{author:"b",likes:3}
+,{author:"b",likes:999}]
+
+const kalax=groupBy(juppiarr, 'author');
+console.log(kalax);
+console.log(kalax[1]);
+
+
+
+
+ */
