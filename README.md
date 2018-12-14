@@ -4,7 +4,8 @@ Simple bloglist backend API /api/blogs
 ```
 controllers
 ├── ES7
-│   └── ASYNCblogscontroller.js
+│   ├── ASYNCblogscontroller.js
+│   └── ASYNCuserscontroller.js
 └── login.js
 models
 ├── blog.js
@@ -15,12 +16,22 @@ requests
 │   ├── get_api_blogs_id.rest
 │   ├── get_api_blogs.rest
 │   ├── post_api_blogs_bearer_auth.rest
+│   ├── post_api_blogs_likes_isnull.rest
+│   ├── post_api_blogs_likes_missing.1.rest
 │   ├── post_api_blogs.rest
 │   └── put_api_blogs.rest
+├── api_users
+│   ├── delete_api_user_id.rest
+│   ├── get_api_users_id.rest
+│   ├── get_api_users.rest
+│   └── post_api_users.rest
 └── login.rest
 tests
 ├── average.test.js
-└── list.test.js
+├── blog_api.test.js
+├── list.test.js
+├── user_api.test.js
+└── user_test_helper.js
 utils
 ├── config.js
 ├── for_testing.js
