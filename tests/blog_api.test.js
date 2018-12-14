@@ -180,8 +180,8 @@ describe('when there is initially some blogs saved', async () => {
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length);
     });
   });
-
-  describe('deletion of a blog', async () => {
+  //npx jest -t 'hw4.13 deletion of a blog'
+  describe('hw4.13 deletion of a blog', async () => {
     let addedblog;
 
     beforeAll(async () => {
