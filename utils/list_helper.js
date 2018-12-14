@@ -76,7 +76,7 @@ const initialBlogs = [
   }
 ];
 
-const format = (blog) => {
+const blogformat = (blog) => {
   return {
     id: blog._id,
     title: blog.title,
@@ -86,7 +86,7 @@ const format = (blog) => {
   };
 };
 
-const nonExistingId = async () => {
+const blognonExistingId = async () => {
   const note = new Blog();
   await note.save();
   await note.remove();
@@ -96,7 +96,7 @@ const nonExistingId = async () => {
 
 const blogsInDb = async () => {
   const blogs = await Blog.find({});
-  return blogs.map(format);
+  return blogs.map(blogformat);
 };
 
 
@@ -300,7 +300,7 @@ const mostBlogs = (blogs) => {
 */
 
 module.exports = {
-  initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes,
+  initialBlogs, blogformat, blognonExistingId, blogsInDb,listLikesISNULL,listNoLikes,
   dummy,listWithOneBlog,
   totalLikes,findWinner,
   mostBlogs,mostLikes,

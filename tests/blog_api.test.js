@@ -1,13 +1,26 @@
 const supertest = require('supertest');
-const { app, server } = require('../index');
+const {
+  app,
+  server
+} = require('../index');
 const api = supertest(app);
 const Blog = require('../models/blog');
-const {   initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes,
-  dummy,listWithOneBlog,
-  totalLikes,findWinner,
-  mostBlogs,mostLikes,
-  findBlogByTitle,findBlogLikesByTitle
- } = require('../utils/list_helper');
+const {
+  initialBlogs,
+  blogformat,
+  blognonExistingId,
+  blogsInDb,
+  listLikesISNULL,
+  listNoLikes,
+  dummy,
+  listWithOneBlog,
+  totalLikes,
+  findWinner,
+  mostBlogs,
+  mostLikes,
+  findBlogByTitle,
+  findBlogLikesByTitle
+} = require('../utils/list_helper');
 
 
 describe('when there is initially some blogs saved', async () => {
@@ -47,7 +60,7 @@ describe('when there is initially some blogs saved', async () => {
   });
 
   test('404 returned by GET /api/blogs/:id with nonexisting valid id', async () => {
-    const validNonexistingId = await nonExistingId();
+    const validNonexistingId = await blognonExistingId();
 
     const response = await api
       .get(`/api/blogs/${validNonexistingId}`)
@@ -63,7 +76,7 @@ describe('when there is initially some blogs saved', async () => {
   });
 
   describe('addition of a new blog', async () => {
-//npx jest -t 'POST /api/blogs succeeds with valid data'
+    //npx jest -t 'POST /api/blogs succeeds with valid data'
     test('POST /api/blogs succeeds with valid data', async () => {
       const blogsAtStart = await blogsInDb();
 
@@ -86,7 +99,7 @@ describe('when there is initially some blogs saved', async () => {
       const titles = blogsAfterOperation.map(r => r.title);
       expect(titles).toContain('POST /api/blogs succeeds with valid data:async/await yksinkertaistaa asynkronisten funktioiden kutsua');
     });
-//npx jest -t 'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL'
+    //npx jest -t 'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL'
     test('hw4.10 POST /api/blogs sets likes=0 if likes ISNULL', async () => {
       const newblog = listLikesISNULL;
       /**
@@ -111,9 +124,9 @@ describe('when there is initially some blogs saved', async () => {
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1); // something inserted
 
       //const findmylikes=findBlogLikesByTitle(blogsAfterOperation,'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL');  // e.g. [7]
-      const findmylikes=findBlogLikesByTitle(blogsAfterOperation,newblog.title);  // e.g. [7]
-//      expect(findmylikes).toBe([0]);
-//      expect(findmylikes).toContain([0]);
+      const findmylikes = findBlogLikesByTitle(blogsAfterOperation, newblog.title); // e.g. [7]
+      //      expect(findmylikes).toBe([0]);
+      //      expect(findmylikes).toContain([0]);
       expect(findmylikes).toEqual([0]);
     });
 
@@ -133,7 +146,7 @@ describe('when there is initially some blogs saved', async () => {
 
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1); // something inserted
 
-      const findmylikes=findBlogLikesByTitle(blogsAfterOperation,'listNoLikes');  // e.g. [7]
+      const findmylikes = findBlogLikesByTitle(blogsAfterOperation, 'listNoLikes'); // e.g. [7]
       expect(findmylikes).toEqual([0]);
     });
 
@@ -209,7 +222,7 @@ describe('when there is initially some blogs saved', async () => {
     });
     //npx jest -t 'hw4.14x PUT /api/blogs updates likes'
     test('hw4.14x PUT /api/blogs updates likes', async () => {
-      let putblogid='5a422a851b54a676234d17f7';
+      let putblogid = '5a422a851b54a676234d17f7';
       const putblog = {
         "id": "5a422a851b54a676234d17f7",
         "title": "React patterns",
@@ -220,8 +233,8 @@ describe('when there is initially some blogs saved', async () => {
 
       const blogsAtStart = await blogsInDb();
       await api
-      //        .put('/api/blogs/5a422a851b54a676234d17f7')
-      //        .put(`/api/blogs/${putblogid}`)
+        //        .put('/api/blogs/5a422a851b54a676234d17f7')
+        //        .put(`/api/blogs/${putblogid}`)
         .put(`/api/blogs/${putblog.id}`)
         .send(putblog)
         .expect(200)
@@ -231,9 +244,9 @@ describe('when there is initially some blogs saved', async () => {
 
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length); // nothing inserted
 
-      const findmylikes=findBlogLikesByTitle(blogsAfterOperation,'React patterns');  // e.g. [7]
+      const findmylikes = findBlogLikesByTitle(blogsAfterOperation, 'React patterns'); // e.g. [7]
       expect(findmylikes).toEqual([70000000000]);
-    /**
+      /**
      * PUT http://localhost:3003/api/blogs/5a422a851b54a676234d17f7
 content-type: application/json
 
@@ -247,11 +260,11 @@ content-type: application/json
      */
     });
 
-    
-  });
 
+  });
+/**
   afterAll(() => {
     server.close();
   });
-
+ */
 });

@@ -11,12 +11,53 @@ usersRouter.post('/', async (request, response) => {
   try {
     const body = request.body;
 
+    if (body.password===null) {
+      return response.status(400).json({
+        error: 'password is null'
+      });
+    }
+    if (body.password===undefined) {
+      return response.status(400).json({
+        error: 'password is undefined'
+      });
+    }
+
+    if (body.password.length < 4) { // || body.password.length > 100) {
+      return response.status(400).json({
+        error: 'password too short'
+      });
+    }
+
+    if (body.username===null) { 
+      return response.status(400).json({
+        error: 'username is null'
+      });
+    }
+
+    if (body.username===undefined) { 
+      return response.status(400).json({
+        error: 'username is undefined'
+      });
+    }
+
+    if (body.adult===null) {
+      body.adult===true;
+    }
+
+    if (body.adult===undefined) {
+      body.adult===true;
+    }
+    
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
-    const existingUser = await User.find({ username: body.username });
-    if (existingUser.length>0) {
-      return response.status(400).json({ error: 'username must be unique' });
+    const existingUser = await User.find({
+      username: body.username
+    });
+    if (existingUser.length > 0) {
+      return response.status(400).json({
+        error: 'username must be unique'
+      });
     }
 
     /**Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia,
@@ -25,6 +66,7 @@ usersRouter.post('/', async (request, response) => {
      * ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin harjoitustehtäväksi.
      *
      */
+
     const user = new User({
       username: body.username,
       name: body.name,
@@ -37,25 +79,30 @@ usersRouter.post('/', async (request, response) => {
     response.json(User.format(savedUser));
   } catch (exception) {
     console.log(exception);
-    response.status(500).json({ error: 'something went wrong...' });
+    response.status(500).json({
+      error: 'something went wrong...'
+    });
   }
 });
 
 usersRouter.get('/', async (request, response) => {
-  try {const users = await User
-    .find({}, {
-      __v: 0
-    })
-  //    .populate('notes')                   // non-consistent outer-join to notes chained to find
-    .populate('blogs', {
-      title: 1,
-      url: 1,
-      likes: 1
-    });
-  response.json(users.map(User.format)); //User.format defined in models/user.js
+  try {
+    const users = await User
+      .find({}, {
+        __v: 0
+      })
+      //    .populate('notes')                   // non-consistent outer-join to notes chained to find
+      .populate('blogs', {
+        title: 1,
+        url: 1,
+        likes: 1
+      });
+    response.json(users.map(User.format)); //User.format defined in models/user.js
   } catch (exception) {
     console.log(exception);
-    response.status(400).send({ error: 'something went royally wrong in your request' });
+    response.status(400).send({
+      error: 'something went royally wrong in your request'
+    });
   }
 });
 
@@ -68,25 +115,30 @@ usersRouter.delete('/:id', async (request, response) => { ///api/users/:id
     response.status(204).end(); //no content
   } catch (exception) {
     console.log(exception);
-    response.status(400).send({ error: 'malformatted id' }); // e.g. FOOBAR
+    response.status(400).send({
+      error: 'malformatted id'
+    }); // e.g. FOOBAR
   }
-});  //notesRouter.delete('/api/notes/:id
+}); //notesRouter.delete('/api/notes/:id
 
 usersRouter.get('/:id', async (request, response) => { ///api/users/:id
-  try {const user= await User.findById(request.params.id)
-    .populate('blogs', {
-      title: 1,
-      url: 1,
-      likes: 1
-    });
-  if (user) {
-    response.json(User.format(user));
-  } else {
-    response.status(404).end(); // request ok format, but id not found=404 !!!
-  }
+  try {
+    const user = await User.findById(request.params.id)
+      .populate('blogs', {
+        title: 1,
+        url: 1,
+        likes: 1
+      });
+    if (user) {
+      response.json(User.format(user));
+    } else {
+      response.status(404).end(); // request ok format, but id not found=404 !!!
+    }
   } catch (exception) {
     console.log(exception);
-    response.status(400).send({ error: 'malformatted id' });
+    response.status(400).send({
+      error: 'malformatted id'
+    });
   }
 }); //usersRouter.get('/api/users/:id'
 

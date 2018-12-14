@@ -106,3 +106,10 @@ git log --oneline --decorate --color
 npm rum watchtest
 ```
 
+### pathological server hangs EADDRINUSE
+```
+lsof -i :3003
+```
+
+
+

@@ -29,7 +29,8 @@ mongoose
 
 //https://github.com/Automattic/mongoose/issues/7108
 //DeprecationWarning: collection.findAndModify is deprecated. Use findOneAndUpdate, findOneAndReplace or findOneAndDelete instead.
-mongoose.set('useFindAndModify', false);
+//FIXME, check if needed mongoose.set('useFindAndModify', false);
+//mongoose.set('useFindAndModify', false);
 //
 // LOTS OF middleware stuff here:
 app.use(cors()); //https://github.com/expressjs/cors
