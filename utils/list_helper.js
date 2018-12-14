@@ -13,21 +13,18 @@ const listWithOneBlog = [
   }
 ];
 
-const listNoLikes = [
-  {
-    title: 'No Likes',
-    author: 'Like Likes',
-  }
-];
+const listNoLikes = {
+  title: 'listNoLikes',
+  author: 'Like Likes',
+  url: 'http://localhost/'
+};
 
-const listLikesISNULL = [
-  {
-    title: 'No Likes',
-    author: 'Like Likes',
-    likes: null
-  }
-];
-
+const listLikesISNULL = {
+  title: 'listLikesISNULL',
+  author: 'Zorro Zorcer',
+  url: 'http://localhost/',
+  likes: null
+};
 const initialBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -262,9 +259,9 @@ const findBlogByTitle = (blogs,title) => {
   return resultArr;
 };
 
-const findme=findBlogByTitle(initialBlogs,'React patterns');
-console.log(initialBlogs);
-console.log(findme);
+//const findme=findBlogByTitle(initialBlogs,'React patterns');
+//console.log(initialBlogs);
+//console.log(findme);
 
 const findBlogLikesByTitle = (blogs,title) => {
   var resultArr = findBlogByTitle(blogs,title);
@@ -272,10 +269,15 @@ const findBlogLikesByTitle = (blogs,title) => {
   return likesArr;
 };
 
-const findmylikes=findBlogLikesByTitle(initialBlogs,'React patterns');
-console.log(findmylikes);
-
-
+//const findmylikes=findBlogLikesByTitle(initialBlogs,'React patterns');
+//console.log(findmylikes);
+//[7]
+//const findmylikes1=findBlogLikesByTitle(listNoLikes,'listNoLikes');
+//console.log(findmylikes1);
+//[ undefined ]
+//const findmylikes2=findBlogLikesByTitle(listLikesISNULL,'listLikesISNULL');
+//console.log(findmylikes2);
+//[ null ]
 
 
 //console.log(mostBlogs(initialBlogs));

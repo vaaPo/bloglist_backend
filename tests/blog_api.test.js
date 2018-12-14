@@ -63,13 +63,14 @@ describe('when there is initially some blogs saved', async () => {
   });
 
   describe('addition of a new blog', async () => {
-
+//npx jest -t 'POST /api/blogs succeeds with valid data'
     test('POST /api/blogs succeeds with valid data', async () => {
       const blogsAtStart = await blogsInDb();
 
       const newblog = {
-        title: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+        title: 'POST /api/blogs succeeds with valid data:async/await yksinkertaistaa asynkronisten funktioiden kutsua',
         author: 'Zorro Zorcer',
+        url: 'http://localhost/',
         likes: 1
       };
 
@@ -82,13 +83,20 @@ describe('when there is initially some blogs saved', async () => {
       const blogsAfterOperation = await blogsInDb();
 
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1);
-
       const titles = blogsAfterOperation.map(r => r.title);
-      expect(titles).toContain('async/await yksinkertaistaa asynkronisten funktioiden kutsua');
+      expect(titles).toContain('POST /api/blogs succeeds with valid data:async/await yksinkertaistaa asynkronisten funktioiden kutsua');
     });
-
+//npx jest -t 'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL'
     test('hw4.10 POST /api/blogs sets likes=0 if likes ISNULL', async () => {
       const newblog = listLikesISNULL;
+      /**
+      const newblog = {
+        title: 'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL',
+        author: 'Zorro Zorcer',
+        url: 'http://localhost/',
+        likes: null
+      };
+       */
 
       const blogsAtStart = await blogsInDb();
 
@@ -102,10 +110,33 @@ describe('when there is initially some blogs saved', async () => {
 
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1); // something inserted
 
-      const findmylikes=findBlogLikesByTitle(initialBlogs,'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL');  // e.g. [7]
-      expect(findmylikes).toContain([0]);
-      
+      //const findmylikes=findBlogLikesByTitle(blogsAfterOperation,'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL');  // e.g. [7]
+      const findmylikes=findBlogLikesByTitle(blogsAfterOperation,newblog.title);  // e.g. [7]
+//      expect(findmylikes).toBe([0]);
+//      expect(findmylikes).toContain([0]);
+      expect(findmylikes).toEqual([0]);
     });
+
+    //npx jest -t 'hw4.10 POST /api/blogs sets likes=0 if likes missing. undefined'
+    test('hw4.10 POST /api/blogs sets likes=0 if likes missing. undefined', async () => {
+      const newblog = listNoLikes;
+
+      const blogsAtStart = await blogsInDb();
+
+      await api
+        .post('/api/blogs')
+        .send(newblog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      const blogsAfterOperation = await blogsInDb();
+
+      expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1); // something inserted
+
+      const findmylikes=findBlogLikesByTitle(blogsAfterOperation,'listNoLikes');  // e.g. [7]
+      expect(findmylikes).toEqual([0]);
+    });
+
 
     test('hw4.11 POST /api/blogs fails with proper statuscode if title is missing', async () => {
       const newblog = {
