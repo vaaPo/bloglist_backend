@@ -137,9 +137,31 @@ describe('when there is initially some blogs saved', async () => {
       expect(findmylikes).toEqual([0]);
     });
 
-
+    //npx jest -t 'hw4.11 POST /api/blogs fails with proper statuscode if title is missing'
     test('hw4.11 POST /api/blogs fails with proper statuscode if title is missing', async () => {
       const newblog = {
+        author: 'Zorro Zorcer',
+        url: 'http://localhost/',
+        likes: 12
+      };
+
+      const blogsAtStart = await blogsInDb();
+
+      await api
+        .post('/api/blogs')
+        .send(newblog)
+        .expect(400);
+
+      const blogsAfterOperation = await blogsInDb();
+
+      //const titles = blogsAfterOperation.map(r => r.title);
+
+      expect(blogsAfterOperation.length).toBe(blogsAtStart.length);
+    });
+    //npx jest -t 'hw4.11 POST /api/blogs fails with proper statuscode if url is missing'
+    test('hw4.11 POST /api/blogs fails with proper statuscode if url is missing', async () => {
+      const newblog = {
+        title: 'no url',
         author: 'Zorro Zorcer',
         likes: 12
       };
@@ -153,7 +175,7 @@ describe('when there is initially some blogs saved', async () => {
 
       const blogsAfterOperation = await blogsInDb();
 
-      const titles = blogsAfterOperation.map(r => r.title);
+      //const titles = blogsAfterOperation.map(r => r.title);
 
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length);
     });
