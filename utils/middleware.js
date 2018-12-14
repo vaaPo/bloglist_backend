@@ -9,6 +9,9 @@ const logger = (request, response, next) => {
   next();
 };
 
+//FIXME token middleware?
+
+
 const error = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' });
 };
