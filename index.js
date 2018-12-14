@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const middleware = require('./utils/middleware');
 var morgan = require('morgan');
 const blogsRouter = require('./controllers/ES7/ASYNCblogscontroller');
-//const usersRouter = require('./controllers/ES7/ASYNCuserscontroller');
+const usersRouter = require('./controllers/ES7/ASYNCuserscontroller');
 const config = require('./utils/config');
 //const loginRouter = require('./controllers/login');
 
@@ -60,6 +60,7 @@ app.use('/api/persons', personsRouter);   // personsontroller has nomore /api/pe
 app.use('/api/users', usersRouter);       // usersRouter has users for notes
 app.use('/api/login', loginRouter);
  */
+app.use('/api/users', usersRouter);       // usersRouter has users for blogs ---notes
 app.use('/api/blogs', blogsRouter);
 
 app.use(middleware.error);

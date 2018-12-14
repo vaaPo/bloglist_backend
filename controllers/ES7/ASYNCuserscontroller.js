@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const usersRouter = require('express').Router();
 const User = require('../../models/user'); //User
-const Note = require('../../models/note');
+//const Note = require('../../models/note');
+const Blog = require('../../models/blog');
 
 //UserUser
 //UserUser.format
@@ -27,6 +28,7 @@ usersRouter.post('/', async (request, response) => {
     const user = new User({
       username: body.username,
       name: body.name,
+      adult: body.adult,
       passwordHash
     });
 
@@ -45,10 +47,10 @@ usersRouter.get('/', async (request, response) => {
       __v: 0
     })
   //    .populate('notes')                   // non-consistent outer-join to notes chained to find
-    .populate('notes', {
-      content: 1,
-      important: 1,
-      date: 1
+    .populate('blogs', {
+      title: 1,
+      url: 1,
+      likes: 1
     });
   response.json(users.map(User.format)); //User.format defined in models/user.js
   } catch (exception) {
@@ -72,10 +74,10 @@ usersRouter.delete('/:id', async (request, response) => { ///api/users/:id
 
 usersRouter.get('/:id', async (request, response) => { ///api/users/:id
   try {const user= await User.findById(request.params.id)
-    .populate('notes', {
-      content: 1,
-      important: 1,
-      date: 1
+    .populate('blogs', {
+      title: 1,
+      url: 1,
+      likes: 1
     });
   if (user) {
     response.json(User.format(user));
