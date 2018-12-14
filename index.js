@@ -10,7 +10,7 @@ var morgan = require('morgan');
 const blogsRouter = require('./controllers/ES7/ASYNCblogscontroller');
 const usersRouter = require('./controllers/ES7/ASYNCuserscontroller');
 const config = require('./utils/config');
-//const loginRouter = require('./controllers/login');
+const loginRouter = require('./controllers/login');
 
 //https://stackoverflow.com/questions/50448272/avoid-current-url-string-parser-is-deprecated-warning-by-setting-usenewurlpars
 //DeprecationWarning: current URL string parser is deprecated,
@@ -63,6 +63,7 @@ app.use('/api/login', loginRouter);
  */
 app.use('/api/users', usersRouter);       // usersRouter has users for blogs ---notes
 app.use('/api/blogs', blogsRouter);
+app.use('/api/login', loginRouter);
 
 app.use(middleware.error);
 
