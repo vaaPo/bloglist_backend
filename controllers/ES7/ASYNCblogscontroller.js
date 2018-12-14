@@ -30,15 +30,15 @@ Every Express application has a built-in app router.
  *  this is going to be ported from ES6 promises to ES7 async await */
 /** the ES6 promises versions are in their own directory */
 blogsRouter.get('/', async (request, response) => {//blogsRouter.get('/'
-  try { const Blogs = await Blog
+  try { const blogs = await Blog
     .find({}, {
       __v: 0
+    })
+    .populate('user', {
+      username: 1,
+      name: 1
     });
-  //    .populate('user', {
-  //      username: 1,
-  //      name: 1
-  //    });
-  response.json(Blogs.map(Blog.format));
+  response.json(blogs.map(Blog.format));
   } catch (exception) {
     console.log(exception);
     response.status(400).send({ error: 'something went royally wrong in your request' });
@@ -48,11 +48,12 @@ blogsRouter.get('/', async (request, response) => {//blogsRouter.get('/'
 
 blogsRouter.get('/:id', async (request, response) => {//blogsRouter.get('/:id'
   try {
-    const getBlog = await Blog.findById(request.params.id);
-    //      .populate('user', {
-    //        username: 1,
-    //        name: 1
-    //      });
+    const getBlog = await Blog.findById(request.params.id)
+      .populate('user', {
+        id: 1,
+        username: 1,
+        name: 1
+      });
 
     if (getBlog) {
       response.json(Blog.format(getBlog));
@@ -105,23 +106,20 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
 
 
     //    const user = await User.findById(body.userId);
-
+    const user = await User.findOne({username: "root"});
+    
     const postBlog = new Blog({
       title: body.title,
       author: body.author,
       url: body.url,
-      likes: body.likes
-      /**
-      content: body.content,
-      important: body.important === undefined ? false : body.important,
-      date: new Date(),
-      user: user._id */
+      likes: body.likes,
+      user: user._id
     });
 
-    //console.log('blogsRouter.post user._id',Blog.user);
+    //console.log('blogsRouter.post user._id',blog.user);
     const savedBlog = await postBlog.save();
-    //    user.Blogs = user.Blogs.concat(savedBlog._id);
-    //    await user.save();                                      // stores to users collection the new Blog id for the user, so user can have several Blogs
+    user.blogs = user.blogs.concat(savedBlog._id);
+    await user.save();                                      // stores to users collection the new Blog id for the user, so user can have several Blogs
     response.json(Blog.format(postBlog));
   }  catch(exception) {
     if (exception.name === 'JsonWebTokenError' ) {
