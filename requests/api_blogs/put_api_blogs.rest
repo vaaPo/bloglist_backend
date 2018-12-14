@@ -1,7 +1,10 @@
-PUT http://localhost:3001/api/notes/5c0e15820d1b8d2d88c26b28
+PUT http://localhost:3003/api/blogs/5a422a851b54a676234d17f7
 content-type: application/json
 
 {
-   "content": "test ccentry via code rest client 12",
-   "important": true
+  "id": "5a422a851b54a676234d17f7",
+  "title": "React patterns",
+  "author": "Michael Chan",
+  "url": "https://reactpatterns.com/",
+  "likes": 7000
 }

@@ -94,13 +94,13 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
     if (body.url === null) {
       return response.status(400).json({ error: 'url is null' });
     }
-  
+
     if (body.likes === undefined) {
-        body.likes = 0;
+      body.likes = 0;
     }
 
     if (body.likes === null) {
-        body.likes = 0;
+      body.likes = 0;
     }
 
 
@@ -144,23 +144,40 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
   });
   */
 
-/**
 blogsRouter.put('/:id', async (request, response) => { //blogsRouter.put('/:id'
   //console.log('blogsRouter.put request.params.id', request.params.id);
   const body = request.body;
-  //console.log('blogsRouter.put body.content:', body.content);
-  //console.log('blogsRouter.put body.important:', body.important);
-
-  if (body.content === undefined) {
-    return response.status(400).json({
-      error: 'content missing'
-    });
+  //console.log('blogsRouter.put body.content:', body.title);
+  //console.log('blogsRouter.put body.important:', body.likes);
+  if (body.title === undefined) {
+    return response.status(400).json({ error: 'title missing' });
   }
+
+  if (body.title === null) {
+    return response.status(400).json({ error: 'title is null' });
+  }
+
+  if (body.url === undefined) {
+    return response.status(400).json({ error: 'url missing' });
+  }
+
+  if (body.url === null) {
+    return response.status(400).json({ error: 'url is null' });
+  }
+
+  if (body.likes === undefined) {
+    body.likes = 0;
+  }
+
+  if (body.likes === null) {
+    body.likes = 0;
+  }
+
   try {
     const savedBlog = await Blog
       .findByIdAndUpdate(request.params.id, {
         $set: {
-          important: body.important
+          likes: body.likes
         }
       }, {
         new: true
@@ -171,7 +188,6 @@ blogsRouter.put('/:id', async (request, response) => { //blogsRouter.put('/:id'
     response.status(400).json({ error: 'something went wrong...' });
   }
 }); //blogsRouter.put('/:id'
- */
 
 blogsRouter.delete('/:id', async (request, response) => { ///api/Blogs/:id
   try {

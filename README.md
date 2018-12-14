@@ -47,7 +47,7 @@ utils
 - [x] 4.11* blogilistan testit, osa 4
 - [x] 4.12* blogilistan laajennus, osa 1
 - [x] 4.13 blogilistan laajennus, osa 2
-- [] 4.14* blogilistan laajennus, osa 3
+- [x] 4.14* blogilistan laajennus, osa 3
 - [] 4.15 blogilistan laajennus, osa 4
 - [] 4.16* blogilistan laajennus, osa 5
 - [] 4.17 blogilistan laajennus, osa 6

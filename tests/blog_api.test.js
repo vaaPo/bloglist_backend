@@ -207,6 +207,47 @@ describe('when there is initially some blogs saved', async () => {
       expect(titles).not.toContain(addedblog.title);
       expect(blogsAfterOperation.length).toBe(blogsAtStart.length - 1);
     });
+    //npx jest -t 'hw4.14x PUT /api/blogs updates likes'
+    test('hw4.14x PUT /api/blogs updates likes', async () => {
+      let putblogid='5a422a851b54a676234d17f7';
+      const putblog = {
+        "id": "5a422a851b54a676234d17f7",
+        "title": "React patterns",
+        "author": "Michael Chan",
+        "url": "https://reactpatterns.com/",
+        "likes": 70000000000
+      };
+
+      const blogsAtStart = await blogsInDb();
+      await api
+      //        .put('/api/blogs/5a422a851b54a676234d17f7')
+      //        .put(`/api/blogs/${putblogid}`)
+        .put(`/api/blogs/${putblog.id}`)
+        .send(putblog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      const blogsAfterOperation = await blogsInDb();
+
+      expect(blogsAfterOperation.length).toBe(blogsAtStart.length); // nothing inserted
+
+      const findmylikes=findBlogLikesByTitle(blogsAfterOperation,'React patterns');  // e.g. [7]
+      expect(findmylikes).toEqual([70000000000]);
+    /**
+     * PUT http://localhost:3003/api/blogs/5a422a851b54a676234d17f7
+content-type: application/json
+
+{
+  "id": "5a422a851b54a676234d17f7",
+  "title": "React patterns",
+  "author": "Michael Chan",
+  "url": "https://reactpatterns.com/",
+  "likes": 7000
+}
+     */
+    });
+
+    
   });
 
   afterAll(() => {
