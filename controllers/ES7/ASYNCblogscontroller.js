@@ -71,15 +71,14 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
   const body = request.body;
   try {
 
-    /**
- *
-     const token = getTokenFrom(request);
+    const token = getTokenFrom(request);
     const decodedToken = jwt.verify(token, process.env.SECRET);
 
     if (!token || !decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })
-    };
-*/
+    }
+    const user = await User.findById(decodedToken.id);
+
     if (body.title === undefined) {
       return response.status(400).json({ error: 'title missing' });
     }
@@ -107,7 +106,7 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
 
     //    const user = await User.findById(body.userId);
     // FIXME User.findOne({ username: 'root' });
-    const user = await User.findOne({ username: 'root' });
+    //const user = await User.findOne({ username: 'root' });  
     
     const postBlog = new Blog({
       title: body.title,

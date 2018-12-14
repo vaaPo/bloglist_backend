@@ -1,9 +1,10 @@
-POST http://localhost:3002/api/notes
+POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InpvcnJvIiwiaWQiOiI1YzExNTA4N2M5NDJhZTcxZmIzMDQ3N2MiLCJpYXQiOjE1NDQ2OTc2MDh9.AESduvNAUnEL0ZVlFN_65DAMHSFzs-oqRw0K_FaBIK4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QyIiwiaWQiOiI1YzE0MmU2YWVkZGVmMzZjNTFlN2RmMzciLCJpYXQiOjE1NDQ4MjY0OTd9.X6Z9NWoRzJ7kzQSgreeK2g_F4pEp6u1MC5uZ2FS2BVI
 
 {
-   "content": "test bearer auth",
-   "important": true,
-   "userId": "5c115087c942ae71fb30477c"
+  "title": "BEARER AUTH goes root2? post_api_blogs.rest talks",
+  "author": "vaaPo",
+  "url": "http://localhost:3003",
+  "likes": 666
 }
