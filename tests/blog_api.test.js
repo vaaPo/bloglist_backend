@@ -2,7 +2,12 @@ const supertest = require('supertest');
 const { app, server } = require('../index');
 const api = supertest(app);
 const Blog = require('../models/blog');
-const { initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes } = require('../utils/list_helper');
+const {   initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes,
+  dummy,listWithOneBlog,
+  totalLikes,findWinner,
+  mostBlogs,mostLikes,
+  findBlogByTitle,findBlogLikesByTitle
+ } = require('../utils/list_helper');
 
 
 describe('when there is initially some blogs saved', async () => {
@@ -95,10 +100,11 @@ describe('when there is initially some blogs saved', async () => {
 
       const blogsAfterOperation = await blogsInDb();
 
-      expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1);
+      expect(blogsAfterOperation.length).toBe(blogsAtStart.length + 1); // something inserted
 
-      const titles = blogsAfterOperation.map(r => r.title);
-      expect(titles).toContain('async/await yksinkertaistaa asynkronisten funktioiden kutsua');
+      const findmylikes=findBlogLikesByTitle(initialBlogs,'hw4.10 POST /api/blogs sets likes=0 if likes ISNULL');  // e.g. [7]
+      expect(findmylikes).toContain([0]);
+      
     });
 
     test('hw4.11 POST /api/blogs fails with proper statuscode if title is missing', async () => {

@@ -254,6 +254,30 @@ const mostLikes = (blogs) => {
   return mostLikesArr; 
 };
 
+//findBlogByTitle,findBlogLikesByTitle
+const findBlogByTitle = (blogs,title) => {
+  var resultArr = blogs.filter(obj => {
+    return obj.title === title;
+  });
+  return resultArr;
+};
+
+const findme=findBlogByTitle(initialBlogs,'React patterns');
+console.log(initialBlogs);
+console.log(findme);
+
+const findBlogLikesByTitle = (blogs,title) => {
+  var resultArr = findBlogByTitle(blogs,title);
+  const likesArr = resultArr.map(r => r.likes);
+  return likesArr;
+};
+
+const findmylikes=findBlogLikesByTitle(initialBlogs,'React patterns');
+console.log(findmylikes);
+
+
+
+
 //console.log(mostBlogs(initialBlogs));
 
 //{ author: 'Robert C. Martin', blogs: 3 }
@@ -274,13 +298,11 @@ const mostBlogs = (blogs) => {
 */
 
 module.exports = {
-  initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes
-  dummy,
-  listWithOneBlog,
-  totalLikes,
-  findWinner,
-  mostBlogs,
-  mostLikes,
+  initialBlogs, format, nonExistingId, blogsInDb,listLikesISNULL,listNoLikes,
+  dummy,listWithOneBlog,
+  totalLikes,findWinner,
+  mostBlogs,mostLikes,
+  findBlogByTitle,findBlogLikesByTitle
 };
 /**
 console.log(dummy());
