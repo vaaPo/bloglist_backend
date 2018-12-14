@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
 
 {
-  "title": "vcode rest post_api_blogs.rest talks 1",
+  "title": "vcode rest post_api_blogs.rest talks 5",
   "author": "vaaPo",
   "url": "http://localhost:3003",
-  "likes": 1
+  "likes": 666
 }

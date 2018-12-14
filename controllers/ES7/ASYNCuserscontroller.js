@@ -47,7 +47,7 @@ usersRouter.post('/', async (request, response) => {
     if (body.adult===undefined) {
       body.adult===true;
     }
-    
+
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
@@ -93,9 +93,11 @@ usersRouter.get('/', async (request, response) => {
       })
       //    .populate('notes')                   // non-consistent outer-join to notes chained to find
       .populate('blogs', {
+        _id: 1,
+        likes: 1,
+        author: 1,
         title: 1,
-        url: 1,
-        likes: 1
+        url: 1
       });
     response.json(users.map(User.format)); //User.format defined in models/user.js
   } catch (exception) {
@@ -125,9 +127,11 @@ usersRouter.get('/:id', async (request, response) => { ///api/users/:id
   try {
     const user = await User.findById(request.params.id)
       .populate('blogs', {
+        _id: 1,
+        likes: 1,
+        author: 1,
         title: 1,
-        url: 1,
-        likes: 1
+        url: 1
       });
     if (user) {
       response.json(User.format(user));

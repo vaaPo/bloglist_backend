@@ -106,7 +106,8 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
 
 
     //    const user = await User.findById(body.userId);
-    const user = await User.findOne({username: "root"});
+    // FIXME User.findOne({ username: 'root' });
+    const user = await User.findOne({ username: 'root' });
     
     const postBlog = new Blog({
       title: body.title,
@@ -116,8 +117,9 @@ blogsRouter.post('/', async (request, response) => { //('/api/Blogs'
       user: user._id
     });
 
-    //console.log('blogsRouter.post user._id',blog.user);
+    console.log('blogsRouter.post user._id',postBlog.user);
     const savedBlog = await postBlog.save();
+    console.log('blogsRouter.post savedBlog._id',savedBlog._id);
     user.blogs = user.blogs.concat(savedBlog._id);
     await user.save();                                      // stores to users collection the new Blog id for the user, so user can have several Blogs
     response.json(Blog.format(postBlog));
