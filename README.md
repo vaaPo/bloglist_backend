@@ -1,7 +1,10 @@
 # bloglist_backend
 Simple bloglist backend API /api/blogs
+## bloglist_frontend
+Will be built to build-directory from the bloglist_frontend repository.
 ## directory
 ```
+build
 controllers
 ├── ES7
 │   ├── ASYNCblogscontroller.js
@@ -60,10 +63,10 @@ utils
 - [x] 4.13 blogilistan laajennus, osa 2
 - [x] 4.14* blogilistan laajennus, osa 3
 - [x] 4.15 blogilistan laajennus, osa 4
-- [] 4.16* blogilistan laajennus, osa 5
-- [] 4.17 blogilistan laajennus, osa 6
-- [] 4.18 blogilistan laajennus, osa 7
-- [] 4.19 blogilistan laajennus, osa 8
+- [x] 4.16* blogilistan laajennus, osa 5
+- [x] 4.17 blogilistan laajennus, osa 6
+- [x] 4.18 blogilistan laajennus, osa 7
+- [x] 4.19 blogilistan laajennus, osa 8
 - [] 4.20* blogilistan laajennus, osa 9
 - [] 4.21* blogilistan laajennus, osa 10
 

@@ -53,7 +53,7 @@ app.use(morgan(function (tokens, req, res) { //app.use(morgan('tiny'));      //F
   ].join(' ');
 })); //morgan(':method :url :status :res[content-length] - :response-time ms')
 
-app.use(express.static('build'));
+app.use(express.static('build'));         // bloglist_frontend build comes here
 app.use(middleware.logger);
 /**
 app.use('/api/notes', notesRouter);   // notecontroller has nomore /api/notes path prefixed
