@@ -62,7 +62,7 @@ app.use('/api/users', usersRouter);       // usersRouter has users for notes
 app.use('/api/login', loginRouter);
  */
 //FIXME token middleware
-app.use(middleware.tokenExtractor);
+//app.use(middleware.tokenExtractor);
 
 app.use('/api/users', usersRouter);       // usersRouter has users for blogs ---notes
 app.use('/api/blogs', blogsRouter);

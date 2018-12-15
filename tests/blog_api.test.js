@@ -262,9 +262,7 @@ content-type: application/json
 
 
   });
-/**
   afterAll(() => {
     server.close();
   });
- */
 });

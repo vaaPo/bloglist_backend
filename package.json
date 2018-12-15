@@ -9,6 +9,7 @@
     "watchmongo": "./mongotrials/watchmongo.sh",
     "watchtest": "NODE_ENV=test nodemon index.js",
     "test": "NODE_ENV=test jest --verbose",
+    "testrunInBand": "NODE_ENV=test jest --verbose --runInBand",
     "lint": "eslint ."
   },
   "author": "paavo",
